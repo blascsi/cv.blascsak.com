@@ -1,3 +1,30 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+
+body {
+  font-family: 'Roboto', sans-serif;
+  color: #fafafa;
+}
+
+main {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 5%;
+}
+
 #background {
   display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.callout {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+  width: 100vw;
 }

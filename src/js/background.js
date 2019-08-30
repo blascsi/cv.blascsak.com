@@ -4,6 +4,7 @@
     circle: '#141414',
   };
   circleVelocity = 0.1;
+
   const circles = [
     generateCircle(window.innerWidth, window.innerHeight, {
       minRadius: 30,

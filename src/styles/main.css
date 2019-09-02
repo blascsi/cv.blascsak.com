@@ -25,11 +25,15 @@ main {
   top: 0;
   left: 0;
   right: 0;
-  margin: 5%;
+  margin: 10%;
 }
 
 section {
   width: 100%;
+}
+
+section:not(:first-of-type) {
+  margin-bottom: 40px;
 }
 
 #background {
@@ -47,12 +51,13 @@ section {
   flex-direction: column;
   height: 100vh;
   justify-content: center;
-  width: 50%;
+  width: 70%;
 }
 
 .callout__logo {
   font-size: 24px;
-  letter-spacing: -8px;
+  letter-spacing: -10px;
+  margin: -5% -5%;
   position: absolute;
   top: 0;
   right: 0;
@@ -66,6 +71,34 @@ section {
 .callout__button-margins {
   margin-top: 40px;
   margin-bottom: 10px;
+}
+
+.about-me .about-me__development {
+  margin-bottom: 40px;
+}
+
+.about-me .about-me__personal {
+  font-size: 14px;
+}
+
+.experience-list {
+  list-style: none;
+}
+
+.experience-list .experience-list__list-header {
+  border-bottom: 2px solid var(--brand-color-purple);
+  display: inline-block;
+  font-size: 18px;
+  letter-spacing: 0.1em;
+  margin-bottom: 10px;
+}
+
+.experience-list .experience-list__paragraph {
+  margin-bottom: 10px;
+}
+
+.experience-list .experience-list__paragraph:last-of-type {
+  margin-bottom: 25px;
 }
 
 /* Utility classes */
@@ -91,11 +124,17 @@ section {
 }
 
 .section-header {
-  border-bottom: 2px solid var(--brand-color-blue);
   display: inline-block;
   font-size: 24px;
   line-height: 65px;
   letter-spacing: 0.1em;
+}
+
+.section-header::before {
+  border-top: 2px solid var(--brand-color-blue);
+  content: '';
+  display: block;
+  margin-left: -31%;
 }
 
 .blue-button {

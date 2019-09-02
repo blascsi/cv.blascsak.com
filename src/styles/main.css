@@ -103,6 +103,28 @@ section:not(:first-of-type) {
   margin-bottom: 25px;
 }
 
+.technologies__list li::before {
+  content: '-';
+  margin-right: 5px;
+}
+
+.technologies__list {
+  margin-bottom: 20px;
+}
+
+.technologies__svg-icon {
+  /*
+  * This filter takes care of the coloring of the SVG icons 
+  *  Generated with https://codepen.io/sosuke/pen/Pjoqqp
+  * TODO: This should be changed because the browser support is just not there yet.
+  */
+  filter: invert(44%) sepia(68%) saturate(3829%) hue-rotate(235deg)
+    brightness(95%) contrast(96%);
+  transform: translate(0, 25%);
+  height: 1.3em;
+  width: 1.3em;
+}
+
 /* Utility classes */
 
 .normal-spaced-text {
@@ -137,11 +159,11 @@ section:not(:first-of-type) {
 }
 
 .blue-button {
-  background-color: var(--background-black);
+  background-color: transparent;
   border: var(--brand-color-blue) solid 2px;
   border-radius: 5px;
   color: var(--brand-color-blue);
-  padding: 5px 40px;
+  padding: 5px 20px;
 }
 
 .full-width {

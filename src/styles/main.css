@@ -3,7 +3,8 @@
 :root {
   --brand-color-blue: #51d6ee;
   --brand-color-purple: #885def;
-  --brand-color-secondary: #ececec;
+  --primary-text-color: #fafafa;
+  --secondary-text-color: #ececec;
   --background-black: '#0E0E0E';
   --background-grey: '#141414';
 }
@@ -13,7 +14,7 @@
 html,
 body {
   font-family: 'Roboto', sans-serif;
-  color: #fafafa;
+  color: var(--secondary-text-color);
   height: 100%;
   width: 100%;
 }
@@ -66,6 +67,7 @@ section:not(:first-of-type) {
 .callout__header {
   font-size: 48px;
   line-height: 65px;
+  color: var(--primary-text-color);
 }
 
 .callout__button-margins {
@@ -119,11 +121,8 @@ section:not(:first-of-type) {
   color: var(--brand-color-purple);
 }
 
-.secondary-text {
-  color: var(--brand-color-secondary);
-}
-
 .section-header {
+  color: var(--primary-text-color);
   display: inline-block;
   font-size: 24px;
   line-height: 65px;

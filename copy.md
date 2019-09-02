@@ -61,4 +61,4 @@ Gatsby, NodeJS, Express, Continous Integration/Deployment, GitHub, GitLab, Prett
 
 # Contact me
 
-GH - LinkedIn - Twitter - E-mail
+E-mail - GH - LinkedIn - Twitter

@@ -1,4 +1,4 @@
-(function backgroundModule() {
+const init = (function backgroundModule() {
   const colors = {
     background: '#0E0E0E',
     circle: '#141414',
@@ -98,7 +98,9 @@
     window.requestAnimationFrame(draw);
   }
 
-  canvasController.resizeCanvas();
-  window.requestAnimationFrame(draw);
-  window.addEventListener('resize', canvasController.resizeCanvas, false);
+  return function() {
+    canvasController.resizeCanvas();
+    window.requestAnimationFrame(draw);
+    window.addEventListener('resize', canvasController.resizeCanvas, false);
+  };
 })();

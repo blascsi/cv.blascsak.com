@@ -1,16 +1,35 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
 
+:root {
+  --brand-color-blue: #51d6ee;
+  --brand-color-purple: #885def;
+  --brand-color-secondary: #ececec;
+  --background-black: '#0E0E0E';
+  --background-grey: '#141414';
+}
+
+/* Basic structure */
+
+html,
 body {
   font-family: 'Roboto', sans-serif;
   color: #fafafa;
+  height: 100%;
+  width: 100%;
 }
 
 main {
+  letter-spacing: 0.05em;
+  line-height: 32px;
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   margin: 5%;
+}
+
+section {
+  width: 100%;
 }
 
 #background {
@@ -20,11 +39,81 @@ main {
   left: 0;
 }
 
+/* Section styles */
+
 .callout {
   align-items: flex-start;
   display: flex;
   flex-direction: column;
   height: 100vh;
   justify-content: center;
-  width: 100vw;
+  width: 50%;
+}
+
+.callout__logo {
+  font-size: 24px;
+  letter-spacing: -8px;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.callout__header {
+  font-size: 48px;
+  line-height: 65px;
+}
+
+.callout__button-margins {
+  margin-top: 40px;
+  margin-bottom: 10px;
+}
+
+/* Utility classes */
+
+.normal-spaced-text {
+  letter-spacing: normal;
+}
+
+.bold-text {
+  font-weight: 700;
+}
+
+.blue-text {
+  color: var(--brand-color-blue);
+}
+
+.purple-text {
+  color: var(--brand-color-purple);
+}
+
+.secondary-text {
+  color: var(--brand-color-secondary);
+}
+
+.section-header {
+  border-bottom: 2px solid var(--brand-color-blue);
+  display: inline-block;
+  font-size: 24px;
+  line-height: 65px;
+  letter-spacing: 0.1em;
+}
+
+.blue-button {
+  background-color: var(--background-black);
+  border: var(--brand-color-blue) solid 2px;
+  border-radius: 5px;
+  color: var(--brand-color-blue);
+  padding: 5px 40px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.link {
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
 }

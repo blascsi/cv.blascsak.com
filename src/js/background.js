@@ -5,6 +5,7 @@ const init = (function backgroundModule() {
   };
   circleVelocity = 0.1;
 
+  // TODO The number and radius of circles should be dynamically set
   const circles = [
     generateCircle(window.innerWidth, window.innerHeight, {
       minRadius: 30,

@@ -40,6 +40,9 @@ const init = (function backgroundModule() {
   function createCanvasController(canvas, backgroundColor) {
     if (!canvas)
       throw new Error('No canvas element provided to the controller.');
+    if (!backgroundColor)
+      throw new Error('Please set the color for the background.');
+
     const ctx = canvas.getContext('2d');
 
     return {

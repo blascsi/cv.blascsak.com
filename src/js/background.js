@@ -39,26 +39,27 @@ const init = (function backgroundModule() {
   function createCanvasController(canvas, backgroundColor) {
     if (!canvas)
       throw new Error('No canvas element provided to the controller.');
+    const ctx = canvas.getContext('2d');
 
     return {
       canvas,
-      ctx: canvas.getContext('2d'),
-      clearCanvas() {
-        this.ctx.globalCompositeOperation = 'source-over';
-        this.ctx.fillstyle = backgroundColor;
-        this.ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx,
+      clearCanvas: () => {
+        ctx.globalCompositeOperation = 'source-over';
+        ctx.fillstyle = backgroundColor;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
       },
-      resizeCanvas() {
-        this.canvas.width = window.innerWidth;
-        this.canvas.height = window.innerHeight;
+      resizeCanvas: () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
       },
-      drawCircle({ x, y, radius }, color) {
-        this.ctx.globalCompositeOperation = 'lighter';
-        this.ctx.beginPath();
-        this.ctx.arc(x, y, radius, 0, Math.PI * 2);
-        this.ctx.closePath();
-        this.ctx.fillStyle = color;
-        this.ctx.fill();
+      drawCircle: ({ x, y, radius }, color) => {
+        ctx.globalCompositeOperation = 'lighter';
+        ctx.beginPath();
+        ctx.arc(x, y, radius, 0, Math.PI * 2);
+        ctx.closePath();
+        ctx.fillStyle = color;
+        ctx.fill();
       },
     };
   }
@@ -101,6 +102,7 @@ const init = (function backgroundModule() {
   return function() {
     canvasController.resizeCanvas();
     window.requestAnimationFrame(draw);
-    window.addEventListener('resize', canvasController.resizeCanvas, false);
+    window.addEventListener('resize', canvasController.resizeCanvas);
+    window.addEventListener('orientationchange', canvasController.resizeCanvas);
   };
 })();

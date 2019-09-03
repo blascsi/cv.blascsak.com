@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+@import url('./reset.css');
+@import url('./icon-font.css');
 
 :root {
   --brand-color-blue: #51d6ee;
@@ -112,10 +114,9 @@ section:not(:first-of-type) {
   margin-bottom: 20px;
 }
 
-.technologies__svg-icon {
-  transform: translate(0, 25%);
-  height: 1.3em;
-  width: 1.3em;
+.contact-me {
+  display: flex;
+  justify-content: space-between;
 }
 
 /* Utility classes */
@@ -156,7 +157,7 @@ section:not(:first-of-type) {
   border: var(--brand-color-blue) solid 2px;
   border-radius: 5px;
   color: var(--brand-color-blue);
-  padding: 5px 20px;
+  padding: 10px 20px;
 }
 
 .full-width {

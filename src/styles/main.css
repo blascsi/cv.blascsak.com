@@ -120,6 +120,10 @@ section:not(:first-of-type) {
   margin: 20px 0 80px 0;
 }
 
+.contact-me span {
+  font-size: 32px;
+}
+
 /* Utility classes */
 
 .text--normal-spaced {

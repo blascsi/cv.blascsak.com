@@ -72,9 +72,10 @@ section:not(:first-of-type) {
   color: var(--primary-text-color);
 }
 
-.callout__button-margins {
+.callout__button {
   margin-top: 40px;
   margin-bottom: 10px;
+  max-width: 300px;
 }
 
 .about-me .about-me__development {
@@ -184,6 +185,9 @@ section:not(:first-of-type) {
   border-radius: 5px;
   color: var(--brand-color-blue);
   font-size: 16px;
+  text-align: center;
+  text-decoration: none;
+  line-height: normal;
   padding: 8px 20px;
 }
 
@@ -207,4 +211,26 @@ section:not(:first-of-type) {
 
 .hidden {
   display: none;
+}
+
+/* Responsive rules */
+
+/* @media only screen and (max-width: 425px) {
+
+} */
+
+@media only screen and (max-width: 768px) and (min-width: 426px) {
+  .mobile {
+    display: none;
+  }
+}
+
+@media only screen and (min-width: 769px) {
+  .mobile {
+    display: none;
+  }
+
+  .tablet {
+    display: none;
+  }
 }

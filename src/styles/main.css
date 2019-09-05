@@ -114,6 +114,27 @@ section:not(:first-of-type) {
   margin-bottom: 20px;
 }
 
+.technologies__show-more {
+  visibility: hidden;
+}
+
+.technologies__show-more:checked ~ .technologies__more {
+  height: auto;
+}
+
+.technologies__show-more:not(:checked) ~ .technologies__more {
+  height: 0;
+}
+
+.technologies__more {
+  transition: height 1s;
+  overflow: hidden;
+}
+
+.technologies__more .technologies__more-intro-paragraph {
+  margin-bottom: 20px;
+}
+
 .contact-me {
   display: flex;
   justify-content: space-between;
@@ -182,4 +203,8 @@ section:not(:first-of-type) {
 
 .link:hover {
   text-decoration: underline;
+}
+
+.hidden {
+  display: none;
 }

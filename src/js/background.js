@@ -59,6 +59,9 @@ const init = (function backgroundModule() {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
       },
+      shouldUpdate: () => {
+        return opacity > 0;
+      },
       updateOpacity: () => {
         const aboveTheFoldAreaVisible =
           (window.innerHeight - window.scrollY) / window.innerHeight;
@@ -89,6 +92,15 @@ const init = (function backgroundModule() {
   }
 
   function draw() {
+    // If the animation is not in frame, we should not
+    // calculate new positions, and draw the circles
+    // just clear the canvas and wait for it to be in frame
+    if (!canvasController.shouldUpdate()) {
+      canvasController.clearCanvas();
+      window.requestAnimationFrame(draw);
+      return;
+    }
+
     canvasController.clearCanvas();
     for (let circle of circles) {
       if (

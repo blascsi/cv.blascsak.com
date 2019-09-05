@@ -139,7 +139,8 @@ section:not(:first-of-type) {
 .contact-me {
   display: flex;
   justify-content: space-between;
-  margin: 20px 0 80px 0;
+  margin: 20px auto 80px auto;
+  max-width: 450px;
 }
 
 .contact-me span {

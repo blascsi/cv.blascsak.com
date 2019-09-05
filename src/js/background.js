@@ -3,7 +3,7 @@ const init = (function backgroundModule() {
     background: '#0E0E0E',
     circle: '#141414',
   };
-  circleVelocity = 0.1;
+  const circleVelocity = 0.1;
 
   // TODO The number and radius of circles should be dynamically set
   const circles = [
@@ -44,12 +44,14 @@ const init = (function backgroundModule() {
       throw new Error('Please set the color for the background.');
 
     const ctx = canvas.getContext('2d');
+    let opacity = 1;
 
     return {
       canvas,
       ctx,
       clearCanvas: () => {
         ctx.globalCompositeOperation = 'source-over';
+        ctx.globalAlpha = 1;
         ctx.fillstyle = backgroundColor;
         ctx.fillRect(0, 0, canvas.width, canvas.height);
       },
@@ -57,8 +59,14 @@ const init = (function backgroundModule() {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
       },
+      updateOpacity: () => {
+        const aboveTheFoldAreaVisible =
+          (window.innerHeight - window.scrollY) / window.innerHeight;
+        opacity = aboveTheFoldAreaVisible >= 0 ? aboveTheFoldAreaVisible : 0;
+      },
       drawCircle: ({ x, y, radius }, color) => {
         ctx.globalCompositeOperation = 'lighter';
+        ctx.globalAlpha = opacity;
         ctx.beginPath();
         ctx.arc(x, y, radius, 0, Math.PI * 2);
         ctx.closePath();
@@ -108,5 +116,6 @@ const init = (function backgroundModule() {
     window.requestAnimationFrame(draw);
     window.addEventListener('resize', canvasController.resizeCanvas);
     window.addEventListener('orientationchange', canvasController.resizeCanvas);
+    window.addEventListener('scroll', canvasController.updateOpacity);
   };
 })();

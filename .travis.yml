@@ -5,5 +5,5 @@ deploy:
   provider: surge
   project: ./dist/
   domain: blascsak-cv-stg.surge.sh
-  script: npm run build
+  before_deploy: npm run build
   skip_cleanup: true

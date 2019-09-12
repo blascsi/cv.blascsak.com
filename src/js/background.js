@@ -1,4 +1,5 @@
 const init = (function backgroundModule() {
+  // TODO Code cleaning is still needed.
   const colors = {
     background: '#0E0E0E',
     circle: '#141414',

@@ -52,7 +52,6 @@ const init = (function backgroundModule() {
     return elements;
   }
 
-  // TODO shomehow scatter the circles around the canvas when it is getting bigger
   function fixBackgroundOnResize(
     maxX,
     maxY,

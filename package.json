@@ -1,0 +1,30 @@
+{
+  "name": "cv",
+  "version": "1.0.0",
+  "description": "A private resume site",
+  "main": "src/index.js",
+  "scripts": {
+    "build": "gulp"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/blascsi/cv.blascsak.com.git"
+  },
+  "keywords": [
+    "resume",
+    "cv"
+  ],
+  "author": "Attila Blascsak",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/blascsi/cv.blascsak.com/issues"
+  },
+  "homepage": "https://github.com/blascsi/cv.blascsak.com#readme",
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-clean-dir": "^1.0.2",
+    "gulp-cli": "^2.2.0",
+    "gulp-inline": "^0.1.3",
+    "gulp-minify-inline": "^1.1.0"
+  }
+}

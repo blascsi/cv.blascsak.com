@@ -1,6 +1,4 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
-@import url('./reset.css');
-@import url('./icon-font.css');
 
 :root {
   --brand-color-blue: #51d6ee;

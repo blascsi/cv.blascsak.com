@@ -1,20 +1,20 @@
 const init = (function backgroundModule() {
-  // TODO Code cleaning is still needed.
   const colors = {
     background: '#0E0E0E',
     circle: '#141414',
   };
-  const circleVelocity = 0.1;
   const circleSizes = {
     small: 0.05,
     medium: 0.07,
     large: 0.1,
   };
-  let animationFrame;
-  let circles = [];
-  const canvasController = createCanvasController(
+  const circleVelocity = 0.1;
+  const animationController = createAnimationController(
     document.getElementById('background'),
-    colors.background
+    colors,
+    circleSizes,
+    circleVelocity,
+    0.5
   );
 
   function generateRandom(min, max) {
@@ -30,187 +30,194 @@ const init = (function backgroundModule() {
     return Math.PI * radius ** 2;
   }
 
-  function generateBackground(maxX, maxY, backgroundFillRatio, circleSizes) {
+  function createAnimationController(
+    canvas,
+    colors,
+    sizes,
+    velocity,
+    backgroundFillRatio
+  ) {
     if (backgroundFillRatio > 1 || backgroundFillRatio < 0)
       throw new Error('Background fill ratio should be between 0 and 1');
 
-    const elements = [];
+    const ctx = canvas.getContext('2d');
+    let animationFrame;
+    let circles = [];
+    let opacity = 1;
 
-    const fillArea = maxX * backgroundFillRatio * (maxY * backgroundFillRatio);
-    let filledArea = 0;
-
-    while (filledArea < fillArea) {
-      for (let [size, ratio] of Object.entries(circleSizes)) {
-        const circleArea = calculateCircleArea(maxX * ratio);
-        if (circleArea + filledArea < fillArea || size === 'small') {
-          elements.push(createCircle(maxX, maxY, maxX * ratio, size));
-          filledArea += circleArea;
-        }
-      }
+    function initialzie() {
+      resizeCanvas();
+      generateBackground();
     }
 
-    return elements;
-  }
+    function generateBackground() {
+      const elements = [];
 
-  function fixBackgroundOnResize(
-    maxX,
-    maxY,
-    backgroundElements,
-    oldWidth,
-    oldHeight
-  ) {
-    if (!backgroundElements || !backgroundElements.length) return;
+      const fillArea =
+        canvas.width *
+        backgroundFillRatio *
+        (canvas.height * backgroundFillRatio);
+      let filledArea = 0;
 
-    if (oldWidth && oldHeight) {
-      const widthRatio = maxX / oldWidth;
-      const heightRatio = maxY / oldHeight;
-      backgroundElements.forEach(element => {
-        element.x = element.x * widthRatio;
-        element.y = element.y * heightRatio;
+      while (filledArea < fillArea) {
+        for (let [size, ratio] of Object.entries(sizes)) {
+          const circleArea = calculateCircleArea(canvas.width * ratio);
+          if (circleArea + filledArea < fillArea || size === 'small') {
+            elements.push(
+              createCircle(
+                canvas.width,
+                canvas.height,
+                canvas.width * ratio,
+                size
+              )
+            );
+            filledArea += circleArea;
+          }
+        }
+      }
+
+      circles = elements;
+    }
+
+    function fixBackgroundOnResize(maxX, maxY, oldWidth, oldHeight) {
+      if (!circles || !circles.length) return;
+
+      if (oldWidth && oldHeight) {
+        const widthRatio = maxX / oldWidth;
+        const heightRatio = maxY / oldHeight;
+        circles.forEach(element => {
+          element.x = element.x * widthRatio;
+          element.y = element.y * heightRatio;
+        });
+      }
+
+      circles.forEach(element => {
+        element.radius = maxX * sizes[element.size];
       });
     }
 
-    backgroundElements.forEach(element => {
-      element.radius = maxX * circleSizes[element.size];
-    });
-  }
-
-  function createCircle(maxX, maxY, radius, size) {
-    return {
-      x: generateRandom(radius, maxX - radius),
-      y: generateRandom(radius, maxY - radius),
-      radius,
-      size,
-      vx: !!generateRandom(0, 1) ? circleVelocity : -circleVelocity,
-      vy: !!generateRandom(0, 1) ? circleVelocity : -circleVelocity,
-    };
-  }
-
-  function moveBackgroundElements(maxX, maxY, elements, controller) {
-    for (let element of elements) {
-      if (
-        element.x + element.radius >= maxX ||
-        element.x - element.radius <= 0
-      ) {
-        element.x =
-          element.x - element.radius <= 0
-            ? 0 + element.radius
-            : maxX - element.radius;
-        element.vx = -element.vx;
-      }
-      if (
-        element.y + element.radius >= maxY ||
-        element.y - element.radius <= 0
-      ) {
-        element.y =
-          element.y - element.radius <= 0
-            ? 0 + element.radius
-            : maxY - element.radius;
-        element.vy = -element.vy;
-      }
-
-      element.x += element.vx;
-      element.y += element.vy;
-      controller.drawCircle(element, colors.circle);
+    function createCircle(maxX, maxY, radius, size) {
+      return {
+        x: generateRandom(radius, maxX - radius),
+        y: generateRandom(radius, maxY - radius),
+        radius,
+        size,
+        vx: !!generateRandom(0, 1) ? velocity : -velocity,
+        vy: !!generateRandom(0, 1) ? velocity : -velocity,
+      };
     }
-  }
 
-  function createCanvasController(canvas, backgroundColor) {
-    if (!canvas)
-      throw new Error('No canvas element provided to the controller.');
-    if (!backgroundColor)
-      throw new Error('Please set the color for the background.');
+    function moveBackgroundElements() {
+      for (let circle of circles) {
+        if (
+          circle.x + circle.radius >= canvas.width ||
+          circle.x - circle.radius <= 0
+        ) {
+          circle.x =
+            circle.x - circle.radius <= 0
+              ? 0 + circle.radius
+              : canvas.width - circle.radius;
+          circle.vx = -circle.vx;
+        }
+        if (
+          circle.y + circle.radius >= canvas.height ||
+          circle.y - circle.radius <= 0
+        ) {
+          circle.y =
+            circle.y - circle.radius <= 0
+              ? 0 + circle.radius
+              : canvas.height - circle.radius;
+          circle.vy = -circle.vy;
+        }
 
-    const ctx = canvas.getContext('2d');
-    let opacity = 1;
-
-    return {
-      canvas,
-      ctx,
-      clearCanvas: () => {
-        ctx.globalCompositeOperation = 'source-over';
-        ctx.globalAlpha = 1;
-        ctx.fillStyle = backgroundColor;
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-      },
-      resizeCanvas: () => {
-        const oldWidth = canvas.width;
-        const oldHeight = canvas.height;
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        return fixBackgroundOnResize(
-          window.innerWidth,
-          window.innerHeight,
-          circles,
-          oldWidth,
-          oldHeight
-        );
-      },
-      shouldUpdate: () => {
-        return opacity > 0;
-      },
-      updateOpacity: () => {
-        const aboveTheFoldAreaVisible =
-          (window.innerHeight - window.scrollY) / window.innerHeight;
-        opacity = aboveTheFoldAreaVisible >= 0 ? aboveTheFoldAreaVisible : 0;
-      },
-      drawCircle: ({ x, y, radius }, color) => {
-        ctx.globalCompositeOperation = 'lighter';
-        ctx.globalAlpha = opacity;
-        ctx.beginPath();
-        ctx.arc(x, y, radius, 0, Math.PI * 2);
-        ctx.closePath();
-        ctx.fillStyle = color;
-        ctx.fill();
-      },
-    };
-  }
-
-  function draw() {
-    if (animationFrame) {
-      window.cancelAnimationFrame(animationFrame);
-      animationFrame = null;
+        circle.x += circle.vx;
+        circle.y += circle.vy;
+        drawCircle(circle, colors.circle);
+      }
     }
-    // If the animation is not in frame, we should not
-    // calculate new positions, and draw the circles
-    // just clear the canvas and wait for it to be in frame
-    if (!canvasController.shouldUpdate()) {
-      canvasController.clearCanvas();
+
+    function clearCanvas() {
+      ctx.globalCompositeOperation = 'source-over';
+      ctx.globalAlpha = 1;
+      ctx.fillStyle = colors.background;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+    }
+
+    function resizeCanvas() {
+      const oldWidth = canvas.width;
+      const oldHeight = canvas.height;
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      return fixBackgroundOnResize(
+        window.innerWidth,
+        window.innerHeight,
+        oldWidth,
+        oldHeight
+      );
+    }
+
+    function shouldUpdate() {
+      return opacity > 0;
+    }
+
+    function updateOpacity() {
+      const aboveTheFoldAreaVisible =
+        (window.innerHeight - window.scrollY) / window.innerHeight;
+      opacity = aboveTheFoldAreaVisible >= 0 ? aboveTheFoldAreaVisible : 0;
+    }
+
+    function drawCircle({ x, y, radius }, color) {
+      ctx.globalCompositeOperation = 'lighter';
+      ctx.globalAlpha = opacity;
+      ctx.beginPath();
+      ctx.arc(x, y, radius, 0, Math.PI * 2);
+      ctx.closePath();
+      ctx.fillStyle = color;
+      ctx.fill();
+    }
+
+    function draw() {
+      if (animationFrame) {
+        window.cancelAnimationFrame(animationFrame);
+        animationFrame = null;
+      }
+      // If the animation is not in frame, we should not
+      // calculate new positions, and draw the circles
+      // just clear the canvas and wait for it to be in frame
+      if (!shouldUpdate()) {
+        clearCanvas();
+        animationFrame = window.requestAnimationFrame(draw);
+        return;
+      }
+
+      clearCanvas();
+      moveBackgroundElements();
       animationFrame = window.requestAnimationFrame(draw);
-      return;
     }
 
-    canvasController.clearCanvas();
-    moveBackgroundElements(
-      window.innerWidth,
-      window.innerHeight,
-      circles,
-      canvasController
-    );
-    animationFrame = window.requestAnimationFrame(draw);
-  }
+    function resize() {
+      if (animationFrame) {
+        window.cancelAnimationFrame(animationFrame);
+        animationFrame = null;
+      }
 
-  function resize() {
-    if (animationFrame) {
-      window.cancelAnimationFrame(animationFrame);
-      animationFrame = null;
+      resizeCanvas();
+      draw();
     }
 
-    canvasController.resizeCanvas();
-    draw();
+    return {
+      initialzie,
+      draw,
+      resize,
+      updateOpacity,
+    };
   }
 
   return function init() {
-    canvasController.resizeCanvas();
-    circles = generateBackground(
-      window.innerWidth,
-      window.innerHeight,
-      0.5,
-      circleSizes
-    );
-    window.requestAnimationFrame(draw);
-    window.addEventListener('resize', resize);
-    window.addEventListener('orientationchange', resize);
-    window.addEventListener('scroll', canvasController.updateOpacity);
+    animationController.initialzie();
+    window.requestAnimationFrame(animationController.draw);
+    window.addEventListener('resize', animationController.resize);
+    window.addEventListener('orientationchange', animationController.resize);
+    window.addEventListener('scroll', animationController.updateOpacity);
   };
 })();

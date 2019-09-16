@@ -130,7 +130,7 @@ const init = (function backgroundModule() {
       clearCanvas: () => {
         ctx.globalCompositeOperation = 'source-over';
         ctx.globalAlpha = 1;
-        ctx.fillstyle = backgroundColor;
+        ctx.fillStyle = backgroundColor;
         ctx.fillRect(0, 0, canvas.width, canvas.height);
       },
       resizeCanvas: () => {

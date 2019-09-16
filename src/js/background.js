@@ -45,7 +45,7 @@ const init = (function backgroundModule() {
     let circles = [];
     let opacity = 1;
 
-    function initialzie() {
+    function initialzieController() {
       resizeCanvas();
       generateBackground();
     }
@@ -206,7 +206,7 @@ const init = (function backgroundModule() {
     }
 
     return {
-      initialzie,
+      initialzieController,
       draw,
       resize,
       updateOpacity,
@@ -214,7 +214,7 @@ const init = (function backgroundModule() {
   }
 
   return function init() {
-    animationController.initialzie();
+    animationController.initialzieController();
     window.requestAnimationFrame(animationController.draw);
     window.addEventListener('resize', animationController.resize);
     window.addEventListener('orientationchange', animationController.resize);

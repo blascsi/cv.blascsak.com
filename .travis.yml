@@ -3,7 +3,17 @@ node_js:
   - node
 script: npm run build
 deploy:
-  provider: surge
-  project: ./dist/
-  domain: blascsak-cv-stg.surge.sh
-  skip_cleanup: true
+  - provider: surge
+    project: ./dist/
+    domain: blascsak-cv-stg.surge.sh
+    skip_cleanup: true
+    on:
+      branch: develop
+  - provider: pages
+    github_token: $GITHUB_TOKEN
+    local_dir: ./dist/
+    committer_from_gh: true
+    skip_cleanup: true
+    keep_history: true
+    on:
+      branch: master

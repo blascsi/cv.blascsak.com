@@ -20,12 +20,12 @@
     "url": "https://github.com/blascsi/cv.blascsak.com/issues"
   },
   "homepage": "https://github.com/blascsi/cv.blascsak.com#readme",
-  "devDependencies": {
+  "dependencies": {
     "gulp": "^4.0.2",
     "gulp-clean-dir": "^1.0.2",
     "gulp-cli": "^2.2.0",
     "gulp-inline": "^0.1.3",
-    "gulp-minify-inline": "^1.1.0"
-  },
-  "dependencies": {}
+    "gulp-minify-inline": "^1.1.0",
+    "gulp-replace": "^1.0.0"
+  }
 }

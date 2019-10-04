@@ -1,5 +1,6 @@
 const gulp = require('gulp');
 const cleanDir = require('gulp-clean-dir');
+const replace = require('gulp-replace');
 const inline = require('gulp-inline');
 const minifyInline = require('gulp-minify-inline');
 
@@ -16,6 +17,7 @@ gulp.task('build', () => {
         base: '/src',
       })
     )
+    .pipe(replace('../../public', 'public'))
     .pipe(minifyInline())
     .pipe(gulp.dest('dist/'));
 });

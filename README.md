@@ -1,7 +1,5 @@
 # Personal resume site
 
-[![Build Status](https://travis-ci.org/blascsi/cv.blascsak.com.svg?branch=master)](https://travis-ci.org/blascsi/cv.blascsak.com)
-
 This site was created because as a Front-End developer I wanted to make my resume / portfolio available online.
 
 ## Usage

@@ -160,20 +160,25 @@
             <span class="text--purple icon-jest" aria-hidden="true"></span>
           </li>
         </ul>
-        <label for="show-more" class="link text--blue">
-          More ▼
-        </label>
-        <input id="show-more" type="checkbox" class="technologies__show-more" />
-        <div class="technologies__more">
-          <p class="technologies__more-intro-paragraph">
-            These are technologies that I tried but not used in production yet,
-            or things that I used and love, but have not deemed important enough
-            for the list above.
-          </p>
-          <p>
-            Gatsby, NodeJS, Express, Continous Integration/Deployment, GitHub,
-            GitLab, Prettier.
-          </p>
+        <input id="show-more" type="checkbox" class="toggle" />
+        <div class="toggle-controls">
+          <label for="show-more" class="toggle-off link text--blue">
+            More ▼
+          </label>
+          <label for="show-more" class="toggle-on link text--blue">
+            Less ▲
+          </label>
+          <div class="toggle__container">
+            <p class="technologies__more-intro-paragraph">
+              These are technologies that I tried but not used in production yet,
+              or things that I used and love, but have not deemed important enough
+              for the list above.
+            </p>
+            <p>
+              Gatsby, NodeJS, Express, Continous Integration/Deployment, GitHub,
+              GitLab, Prettier.
+            </p>
+          </div>
         </div>
       </section>
       <section id="contact-me">

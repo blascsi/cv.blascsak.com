@@ -114,18 +114,6 @@ section:not(:first-of-type) {
   margin-bottom: 20px;
 }
 
-.technologies__show-more {
-  visibility: hidden;
-}
-
-.technologies__show-more:checked ~ .technologies__more {
-  height: auto;
-}
-
-.technologies__show-more:not(:checked) ~ .technologies__more {
-  height: 0;
-}
-
 .technologies__more {
   transition: height 1s;
   overflow: hidden;
@@ -211,6 +199,35 @@ section:not(:first-of-type) {
 
 .hidden {
   display: none;
+}
+
+.toggle {
+  display: none;
+}
+
+.toggle:not(:checked) + .toggle-controls > .toggle-on {
+  display: none;
+}
+
+.toggle:checked + .toggle-controls > .toggle-on {
+  display: block;
+}
+
+.toggle:not(:checked) + .toggle-controls > .toggle-off {
+  display: block;
+}
+
+.toggle:checked + .toggle-controls > .toggle-off {
+  display: none;
+}
+
+.toggle:not(:checked) + .toggle-controls > .toggle__container {
+  display: none;
+  height: 0;
+}
+
+.toggle:checked + .toggle-controls > .toggle__container {
+  display: block;
 }
 
 /* Responsive rules */

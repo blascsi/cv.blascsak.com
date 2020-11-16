@@ -1,4 +1,4 @@
-const init = (function backgroundModule() {
+(function () {
   const colors = {
     background: '#0E0E0E',
     circle: '#141414',
@@ -85,13 +85,13 @@ const init = (function backgroundModule() {
       if (oldWidth && oldHeight) {
         const widthRatio = maxX / oldWidth;
         const heightRatio = maxY / oldHeight;
-        circles.forEach(element => {
+        circles.forEach((element) => {
           element.x = element.x * widthRatio;
           element.y = element.y * heightRatio;
         });
       }
 
-      circles.forEach(element => {
+      circles.forEach((element) => {
         element.radius = maxX * sizes[element.size];
       });
     }
@@ -213,11 +213,9 @@ const init = (function backgroundModule() {
     };
   }
 
-  return function init() {
-    animationController.initialzieController();
-    window.requestAnimationFrame(animationController.draw);
-    window.addEventListener('resize', animationController.resize);
-    window.addEventListener('orientationchange', animationController.resize);
-    window.addEventListener('scroll', animationController.updateOpacity);
-  };
+  animationController.initialzieController();
+  window.requestAnimationFrame(animationController.draw);
+  window.addEventListener('resize', animationController.resize);
+  window.addEventListener('orientationchange', animationController.resize);
+  window.addEventListener('scroll', animationController.updateOpacity);
 })();

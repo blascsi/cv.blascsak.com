@@ -56,17 +56,6 @@ section:not(:first-of-type) {
   width: 70%;
 }
 
-.callout__logo {
-  margin: -8% -8%;
-  position: absolute;
-  top: 0;
-  right: 0;
-}
-
-.callout__logo .logo {
-  width: 40px;
-}
-
 .callout__header {
   font-size: 48px;
   line-height: 65px;

@@ -13,7 +13,7 @@ However if you want to test the build task of the site before a deployment:
 3. Run `npm run build`
 4. Check if everything works correctly with loading `dist/index.html` into your browser.
 
-(Note: The build process replaces all strings matching `../../public` to `public`. Keep this in mind while development or make the replacement more specific if needed.)
+(Note: The build process replaces all strings matching `../../public` and `./public` to `public`. Keep this in mind while development or make the replacement more specific if needed.)
 
 ## Reason for the build task
 

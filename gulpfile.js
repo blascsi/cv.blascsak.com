@@ -22,6 +22,7 @@ gulp.task('build', () => {
       })
     )
     .pipe(replace('../../public', 'public'))
+    .pipe(replace('./public', 'public'))
     .pipe(minifyInline())
     .pipe(gulp.dest('dist/'));
 });

@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
 
 :root {
-  --brand-color-blue: #51d6ee;
-  --brand-color-purple: #885def;
+  --brand-color-blue: #2ee5c6;
+  --brand-color-purple: #8366ff;
   --primary-text-color: #fafafa;
   --secondary-text-color: #ececec;
   --background-black: #0e0e0e;
@@ -57,12 +57,14 @@ section:not(:first-of-type) {
 }
 
 .callout__logo {
-  font-size: 24px;
-  letter-spacing: -10px;
-  margin: -5% -5%;
+  margin: -8% -8%;
   position: absolute;
   top: 0;
   right: 0;
+}
+
+.callout__logo .logo {
+  width: 40px;
 }
 
 .callout__header {

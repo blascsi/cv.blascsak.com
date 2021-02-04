@@ -88,11 +88,11 @@ section:not(:first-of-type) {
   margin-bottom: 10px;
 }
 
-.experience-list .experience-list__paragraph {
+.experience-list p {
   margin-bottom: 10px;
 }
 
-.experience-list .experience-list__paragraph:last-of-type {
+.experience-list p:last-of-type {
   margin-bottom: 25px;
 }
 

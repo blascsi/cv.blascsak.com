@@ -182,6 +182,7 @@ section:not(:first-of-type) {
 
 .link {
   text-decoration: none;
+  color: var(--brand-color-blue);
 }
 
 .link:hover {

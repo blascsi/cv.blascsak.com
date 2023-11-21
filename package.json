@@ -2,9 +2,9 @@
   "name": "cv",
   "version": "1.0.0",
   "description": "A private resume site",
-  "main": "src/index.js",
+  "browserslist": "> 0.5%, last 2 versions, not dead",
   "scripts": {
-    "build": "parcel build index.html --out-dir dist"
+    "build": "parcel build index.html --dist-dir dist"
   },
   "repository": {
     "type": "git",
@@ -15,16 +15,17 @@
     "cv"
   ],
   "author": "Attila Blascsak",
-  "license": "ISC",
   "bugs": {
     "url": "https://github.com/blascsi/cv.blascsak.com/issues"
   },
   "homepage": "https://github.com/blascsi/cv.blascsak.com#readme",
   "dependencies": {
-    "parcel-bundler": "^1.12.4",
-    "parcel-plugin-static-files-copy": "^2.5.0"
+    "parcel": "^2.0.0",
+    "parcel-reporter-static-files-copy": "^1.5.3"
   },
-  "staticFiles": {
-    "staticPath": ["./CNAME"]
-  }
+  "staticFiles": [
+    {
+      "staticPath": "CNAME"
+    }
+  ]
 }
